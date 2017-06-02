@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="bf377ece5c4373df2744a4f8c82c48b72a7d08eb">
+        sha1="a2d0d7546dbc6a6d891b65241f85f6b4239aae78">
         <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_71ca2654ba98efea9378e9b24a4e78e0f29a23c3/classes.dex" />
     </item>
     <item
@@ -43,7 +43,7 @@
         jumboMode="true"
         optimize="true"
         revision="22.0.1"
-        sha1="be454741a08a366a3a9f9f8bd2bcd9ade7eac672">
+        sha1="be1e75772871517a9830db55dd7560d72510b98b">
         <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5d5b544845803899ebd8164d0f9dc9a74fba746c/classes.dex" />
     </item>
     <item

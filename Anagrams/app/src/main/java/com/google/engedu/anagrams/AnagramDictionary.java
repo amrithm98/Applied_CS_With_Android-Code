@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -31,15 +33,30 @@ public class AnagramDictionary {
     private static final int DEFAULT_WORD_LENGTH = 3;
     private static final int MAX_WORD_LENGTH = 7;
     private Random random = new Random();
-    public ArrayList<String> wordList=new ArrayList<String>();
+    public ArrayList<String> wordList=new ArrayList<>();
+    public HashMap<String,ArrayList<String>> lettersToWord=new HashMap<>();
+    public HashSet<String> wordSet=new HashSet<>();
     public AnagramDictionary(Reader reader) throws IOException {
         BufferedReader in = new BufferedReader(reader);
         String line;
         while((line = in.readLine()) != null) {
             String word = line.trim();
+            //Adding to wordlist
             wordList.add(word);
+            //Adding to hash set
+            wordSet.add(word);
+            //Adding to hash map
+            String key=sortLetters(word);
+            if(lettersToWord.containsKey(key)){
+                lettersToWord.get(key).add(word);
+            }
+            else
+            {
+                ArrayList<String> newWords=new ArrayList<>();
+                newWords.add(word);
+                lettersToWord.put(key,newWords);
+            }
         }
-        Log.d("Length",String.valueOf(wordList.size()));
     }
 
     public boolean isGoodWord(String word, String base) {
@@ -48,11 +65,11 @@ public class AnagramDictionary {
 
     public List<String> getAnagrams(String targetWord) {
         ArrayList<String> result = new ArrayList<String>();
-        for(String e:wordList){
-            if((sortLetters(e).equals(sortLetters(targetWord)))&&(targetWord.length()==e.length())){
-                result.add(e);
-            }
-        }
+//        for(String e:wordList){
+//            if((sortLetters(e).equals(sortLetters(targetWord)))&&(targetWord.length()==e.length())){
+//                result.add(e);
+//            }
+//        }
         return result;
     }
 
