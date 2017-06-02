@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     String userScoreLabel = "Your Score : ";
     String compScoreLabel = " Computer Score : ";
-    String userTurnScoreLabel = " Your Turn Score : ";
+    String userTurnScoreLabel = "\nYour Turn Score : ";
     String compTurnScoreLabel = "\nComputer Turn Score : ";
 
     String labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore;
@@ -74,8 +74,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void holdClicked(View view){
+
         Log.d("Click","Hold");
 
+        userOverallScore += userTurnScore;
+        userTurnScore = 0;
+
+        labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore;
+        status.setText(labelText);
+
+        computerTurn();
 
     }
 
@@ -83,18 +91,19 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("Click","Reset");
 
-
         userTurnScore=0;
         userOverallScore=0;
         computerTurnScore=0;
         computerOverallScore=0;
 
         labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore;
+        status.setText(labelText);
         enableButtons(true);
+
     }
 
     public void computerTurn(){
-
+        
     }
 
     private int rollDice() {
