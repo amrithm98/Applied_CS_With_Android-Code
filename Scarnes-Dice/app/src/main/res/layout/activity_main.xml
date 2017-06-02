@@ -19,28 +19,6 @@
         android:layout_marginBottom="50dp"
         />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#01579b"
-        android:id="@+id/reset"
-        android:text="Reset"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#bf360c"
-        android:id="@+id/hold"
-        android:text="Hold"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/reset"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,9 +34,36 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#64dd17"
-        android:id="@+id/roll"
+        android:id="@+id/btn_roll"
         android:text="Roll"
-        android:layout_above="@+id/hold"
+        android:onClick="rollClicked()"
+        android:layout_above="@+id/btn_hold"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#bf360c"
+        android:id="@+id/btn_hold"
+        android:text="Hold"
+        android:onClick="holdClicked()"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/btn_reset"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#01579b"
+        android:id="@+id/btn_reset"
+        android:text="Reset"
+        android:onClick="resetClicked()"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
