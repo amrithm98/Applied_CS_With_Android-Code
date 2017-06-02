@@ -60,21 +60,45 @@ public class AnagramDictionary {
     }
 
     public boolean isGoodWord(String word, String base) {
-        return true;
+
+        boolean status;
+        status=(wordSet.contains(word) && !word.contains(base));
+        return status;
     }
 
     public List<String> getAnagrams(String targetWord) {
         ArrayList<String> result = new ArrayList<String>();
-//        for(String e:wordList){
-//            if((sortLetters(e).equals(sortLetters(targetWord)))&&(targetWord.length()==e.length())){
-//                result.add(e);
-//            }
-//        }
+        for(String e:wordList){
+            if((sortLetters(e).equals(sortLetters(targetWord)))&&(targetWord.length()==e.length())){
+                result.add(e);
+            }
+        }
+//        String key=sortLetters(targetWord);
+//        result=lettersToWord.get(key);
         return result;
     }
 
     public List<String> getAnagramsWithOneMoreLetter(String word) {
         ArrayList<String> result = new ArrayList<String>();
+        String alphabets="abcdefghijklmnopqrstuvwxyz";
+        for(int i=0;i<alphabets.length();i++)
+        {
+            String withOneMoreLetter=word+alphabets.charAt(i);
+            String key=sortLetters(withOneMoreLetter);
+            if(lettersToWord.containsKey(key)){
+                ArrayList<String> temp=new ArrayList<>();
+                temp=lettersToWord.get(key);
+                for(String s:temp)
+                {
+                    //Remove the not Good words
+                    if(!isGoodWord(s,word))
+                    {
+                        temp.remove(s);
+                    }
+                }
+                result.addAll(temp);
+            }
+        }
         return result;
     }
 
