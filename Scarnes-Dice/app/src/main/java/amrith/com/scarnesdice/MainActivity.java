@@ -65,13 +65,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(rolledNumber==1){
             userTurnScore = 0;
+            //No need to add 0 to overall score
+
             labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore + "\n you lost your chance";
+
             computerTurn();
         }
         else
         {
-            userTurnScore=rolledNumber;
-            userOverallScore+=userTurnScore;
+            userTurnScore+=rolledNumber;
             labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore;
         }
 
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("Click","Hold");
 
-        userOverallScore += userTurnScore;
+        userOverallScore += userTurnScore;  //Calculate Overall score only when user loses or presses hold button
         userTurnScore = 0;
 
         labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore;
@@ -123,8 +125,80 @@ public class MainActivity extends AppCompatActivity {
                         enableButtons(false);
                     }
                 });
-            }
-        },0,500);
+
+                final int computerRolledNumber=rollDice();
+
+                //Change Image
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        diceImage.setImageResource(drawable[computerRolledNumber]);
+                    }
+                });
+
+                int rolledNumber=computerRolledNumber+1;
+
+                if(computerRolledNumber==1)
+                {
+                    computerTurnScore=0;
+                    labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore
+                            + "\nComputer rolled a one and lost it's chance";
+
+                    //Enable Buttons and Set Label Again
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            enableButtons(true);
+                            status.setText(labelText);
+                        }
+                    });
+
+                    //cancel the timer, this is exiting out of function
+                    computerTimer.cancel();
+                }
+
+                else {
+
+                    computerTurnScore += computerRolledNumber;
+
+                    labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore
+                            + "\nComputer rolled a " + computerRolledNumber
+                            + compTurnScoreLabel + computerTurnScore;
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            status.setText(labelText);
+                        }
+                    });
+
+                    if(computerTurnScore>20)
+                    {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                enableButtons(true);
+                            }
+                        });
+
+                        //Calculate score till now
+                        computerOverallScore += computerTurnScore;
+                        computerTurnScore = 0;
+                        labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + "\nComputer holds";
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                status.setText(labelText);
+                            }
+                        });
+
+                        computerTimer.cancel();
+                    }
+                }
+
+            }//end of run
+        },0,3000);//end of timer
 
     }
 
