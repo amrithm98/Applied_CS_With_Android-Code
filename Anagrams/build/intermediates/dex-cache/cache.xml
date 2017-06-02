@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="bf377ece5c4373df2744a4f8c82c48b72a7d08eb">
+        <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_71ca2654ba98efea9378e9b24a4e78e0f29a23c3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/amrith/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.2.1_2018310c53cb7cba0f7d5f3cc0db3a5b98719328/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="1821601ddbec5ff125653097812823388700af74">
+        <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-22.2.1_1ae0fda0e295375cd637e9fb5fcf670a416aa90e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.2.1_73e260043dca39810b4e7849183d021e96d6af7b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="be454741a08a366a3a9f9f8bd2bcd9ade7eac672">
+        <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5d5b544845803899ebd8164d0f9dc9a74fba746c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-22.2.1_4a7ee7034a0b434cfd81da250aebba239a8dfe90/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/home/amrith/AppliedCS/Anagrams/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-22.2.1_b4641e22a0242515e1be277041c91404c4e5e911/classes.dex" />
+    </item>
+
+</items>
