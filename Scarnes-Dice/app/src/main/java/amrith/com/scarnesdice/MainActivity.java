@@ -115,7 +115,14 @@ public class MainActivity extends AppCompatActivity {
         computerTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                
+
+                //First change - Disable buttons
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        enableButtons(false);
+                    }
+                });
             }
         },0,500);
 
