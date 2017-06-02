@@ -106,15 +106,17 @@ public class AnagramDictionary {
             String key=sortLetters(withOneMoreLetter);
             if(lettersToWord.containsKey(key)){
                 ArrayList<String> temp=new ArrayList<>();
+                ArrayList<String> removeList=new ArrayList<>();
                 temp=lettersToWord.get(key);
                 for(String s:temp)
                 {
                     //Remove the not Good words
                     if(!isGoodWord(s,word))
                     {
-                        temp.remove(s);
+                        removeList.add(s);
                     }
                 }
+                temp.removeAll(removeList);//otherwise crash
                 result.addAll(temp);
             }
         }
