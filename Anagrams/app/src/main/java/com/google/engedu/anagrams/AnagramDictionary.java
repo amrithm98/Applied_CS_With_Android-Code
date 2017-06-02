@@ -139,6 +139,8 @@ public class AnagramDictionary {
             ArrayList<String> arrayList = (ArrayList<String>) getAnagramsWithOneMoreLetter(randomWord);
 
             //validate the conditions given
+
+            //OPTMISATION : Returning words with more than min anagrams
             if ((randomWord.length() == wordLength) && arrayList.size() > MIN_NUM_ANAGRAMS) {
 
                 //increment the wordLength for next stage
