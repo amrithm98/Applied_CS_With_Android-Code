@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import static amrith.com.scarnesdice.R.id.imageView;
+
 public class MainActivity extends AppCompatActivity {
 
     public int userTurnScore=0,userOverallScore=0,computerTurnScore=0,computerOverallScore=0;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         status=(TextView)findViewById(R.id.statusView);
 
-        diceImage=(ImageView)findViewById(R.id.imageView);
+        diceImage=(ImageView)findViewById(imageView);
     }
 
     public void rollClicked(View view){
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void computerTurn(){
-        
+
     }
 
     private int rollDice() {
@@ -119,5 +121,46 @@ public class MainActivity extends AppCompatActivity {
         hold.setEnabled(isEnabled);
     }
 
+    public void computerTurnOld() {
+
+        Log.d("Call", "computerTurnOld called ");
+        enableButtons(false);
+
+        while (true) {
+
+            int computerRolledNumber = rollDice();
+            diceImage.setImageResource(drawable[computerRolledNumber]);
+            computerRolledNumber++;
+
+            Log.d("Turn", "computerTurn: " + computerRolledNumber);
+
+            if (computerRolledNumber == 1) {
+                computerTurnScore = 0;
+                labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore
+                        + "\nComputer rolled a one and lost it's chance";
+                enableButtons(true);
+                status.setText(labelText);
+                return;
+            }
+
+            else {
+
+                computerTurnScore += computerRolledNumber;
+                labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore
+                        + "\nComputer rolled a " + computerRolledNumber;
+                status.setText(labelText);
+            }
+            //hold strategy for comp...if turnScore is > 20 then hold and save the turnScore and exit from this function, also enable the buttons
+            if (computerTurnScore > 20) {
+                computerOverallScore += computerTurnScore;
+                computerTurnScore = 0;
+                labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + "\n" +
+                        "Computer holds";
+                status.setText(labelText);
+                enableButtons(true);
+                return;
+            }
+        }
+    }
 
 }
