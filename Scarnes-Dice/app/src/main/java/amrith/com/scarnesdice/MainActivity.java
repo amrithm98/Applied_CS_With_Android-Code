@@ -1,5 +1,6 @@
 package amrith.com.scarnesdice;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,7 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
             labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore + "\n you lost your chance";
 
-            computerTurn();
+            //Start computer turn after one second delay
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    computerTurn();
+                }
+            },3000);
         }
         else
         {
@@ -126,17 +133,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                final int computerRolledNumber=rollDice();
+                int computerRolledNumber=rollDice();
 
+                final int finalRolled=computerRolledNumber;
                 //Change Image
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        diceImage.setImageResource(drawable[computerRolledNumber]);
+                        diceImage.setImageResource(drawable[finalRolled]);
                     }
                 });
 
-                int rolledNumber=computerRolledNumber+1;
+                computerRolledNumber++;
 
                 if(computerRolledNumber==1)
                 {
