@@ -19,10 +19,12 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +40,24 @@ public class GhostActivity extends AppCompatActivity {
     private boolean userTurn = false;
     private Random random = new Random();
 
+    Button challenge,reset;
+    TextView ghostText,ghostStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ghost);
+        challenge=(Button)findViewById(R.id.btn_challenge);
+        reset=(Button)findViewById(R.id.btn_reset);
+        ghostText=(TextView)findViewById(R.id.ghostText);
+        ghostStatus=(TextView)findViewById(R.id.gameStatus);
         AssetManager assetManager = getAssets();
+        try{
+            dictionary=new SimpleDictionary(getAssets().open("words.txt"));
+        }catch (IOException e)
+        {
+            Log.d("ERROR",e.toString());
+        }
         /**
          **
          **  YOUR CODE GOES HERE
