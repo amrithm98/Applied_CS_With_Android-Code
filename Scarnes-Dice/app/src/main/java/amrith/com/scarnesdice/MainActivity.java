@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static amrith.com.scarnesdice.R.id.imageView;
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     Button reset,hold,roll;
     TextView status;
     ImageView diceImage;
+
+    Timer computerTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void computerTurn(){
+
+        computerTimer=new Timer();
+
+        computerTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                
+            }
+        },0,500);
 
     }
 
