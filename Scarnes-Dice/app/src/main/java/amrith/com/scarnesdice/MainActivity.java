@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 import java.util.Timer;
@@ -69,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
             //No need to add 0 to overall score
 
             labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore + "\n you lost your chance";
-
+            //Since there's a delay here... disable buttons..otherwise u can roll within the 3 seconds
+            enableButtons(false);
             //Start computer turn after one second delay
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -97,9 +99,16 @@ public class MainActivity extends AppCompatActivity {
 
         labelText = userScoreLabel + userOverallScore + compScoreLabel + computerOverallScore + userTurnScoreLabel + userTurnScore;
         status.setText(labelText);
-
-        computerTurn();
-
+        if(userOverallScore>=100)
+        {
+            Toast.makeText(getApplicationContext(),"You Won!!",Toast.LENGTH_SHORT).show();
+            status.setText("You Are the Winner!!");
+            enableButtons(false);
+        }
+        else
+        {
+            computerTurn();
+        }
     }
 
     public void resetClicked(View view){
@@ -200,7 +209,12 @@ public class MainActivity extends AppCompatActivity {
                                 status.setText(labelText);
                             }
                         });
-
+                        if(computerOverallScore>100)
+                        {
+                            Toast.makeText(getApplicationContext(),"Computer Wins!!",Toast.LENGTH_LONG).show();
+                            status.setText("Computer : I won the Game !!!");
+                            enableButtons(false);
+                        }
                         computerTimer.cancel();
                     }
                 }
