@@ -34,12 +34,13 @@ import java.util.Random;
 
 
 public class GhostActivity extends AppCompatActivity {
+
     private static final String COMPUTER_TURN = "Computer's turn";
     private static final String USER_TURN = "Your turn";
     private GhostDictionary dictionary;
     private boolean userTurn = false;
     private Random random = new Random();
-
+    public String wordFragment="";
     Button challenge,reset;
     TextView ghostText,ghostStatus;
 
@@ -58,11 +59,6 @@ public class GhostActivity extends AppCompatActivity {
         {
             Log.d("ERROR",e.toString());
         }
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         **/
         onStart(null);
     }
 
@@ -115,6 +111,22 @@ public class GhostActivity extends AppCompatActivity {
         label.setText(USER_TURN);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("text",ghostText.getText().toString());
+        outState.putString("label",ghostStatus.getText().toString());
+        outState.putBoolean("ut",userTurn);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        savedInstanceState.get("text");
+        savedInstanceState.get("label");
+        savedInstanceState.get("ut");
+    }
+
     /**
      * Handler for user key presses.
      * @param keyCode
@@ -128,6 +140,13 @@ public class GhostActivity extends AppCompatActivity {
          **  YOUR CODE GOES HERE
          **
          **/
+        if(keyCode<=KeyEvent.KEYCODE_Z &&keyCode>=KeyEvent.KEYCODE_A){
+            Log.d("keypressed",String.valueOf(keyCode));
+            char pressKey=(char)event.getUnicodeChar();
+            ghostText.append(String.valueOf(pressKey));
+            userTurn=false;
+            computerTurn();
+        }
         return super.onKeyUp(keyCode, event);
     }
 }

@@ -54,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_reset"
+        android:onClick="onStart"
         android:layout_below="@+id/gameStatus"
         android:layout_toEndOf="@+id/btn_challenge" />
 
