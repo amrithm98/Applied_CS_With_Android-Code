@@ -62,6 +62,21 @@ public class GhostActivity extends AppCompatActivity {
         onStart(null);
     }
 
+    public void challenge(View view){
+        String string = ghostText.getText().toString();
+        if (string.length()>=4&&dictionary.isWord(string)) {
+            ghostText.setText("You Win");
+            return;
+        }
+        if (string.length()>=4 && !dictionary.isWord(dictionary.getAnyWordStartingWith(string))) {
+            ghostStatus.setText("you win");
+            return;
+        }
+        String display=dictionary.getAnyWordStartingWith(string);
+        ghostText.setText(display);
+        ghostStatus.setText("You lose");
+        return;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -105,10 +120,30 @@ public class GhostActivity extends AppCompatActivity {
     }
 
     private void computerTurn() {
-        TextView label = (TextView) findViewById(R.id.gameStatus);
+//        TextView label = (TextView) findViewById(R.id.gameStatus);
         // Do computer turn stuff then make it the user's turn again
+        String prefix,result;
+        prefix=ghostText.getText().toString();
+        Log.d("prefix",prefix);
+        if(prefix==null)
+        {
+            prefix="";
+        }
+        if(prefix.length()>=1 && dictionary.isWord(prefix))
+        {
+            ghostStatus.setText("You Lose!!");
+            return;
+        }
+//        Log.d("startingWord",dictionary.getAnyWordStartingWith(prefix));
+        result=dictionary.getAnyWordStartingWith(prefix);
+        if(result.isEmpty())
+        {
+            ghostStatus.setText("You Lose!!");
+            return;
+        }
+        ghostText.append(String.valueOf(result.charAt(prefix.length())));
         userTurn = true;
-        label.setText(USER_TURN);
+        ghostStatus.setText(USER_TURN);
     }
 
     @Override

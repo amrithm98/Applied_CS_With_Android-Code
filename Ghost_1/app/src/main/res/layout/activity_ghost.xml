@@ -47,6 +47,7 @@
         android:id="@+id/btn_challenge"
         android:layout_below="@+id/gameStatus"
         android:text="Challenge"
+        android:onClick="challenge"
       />
 
     <Button

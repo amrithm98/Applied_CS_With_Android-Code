@@ -15,15 +15,18 @@
 
 package com.google.engedu.ghost;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SimpleDictionary implements GhostDictionary {
     private ArrayList<String> words;
-
+    Random random=new Random();
     public SimpleDictionary(InputStream wordListStream) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(wordListStream));
         words = new ArrayList<>();
@@ -42,9 +45,44 @@ public class SimpleDictionary implements GhostDictionary {
 
     @Override
     public String getAnyWordStartingWith(String prefix) {
-        return null;
+        if(prefix=="")
+        {
+            int index=random.nextInt(words.size());
+            return words.get(index);
+        }
+        else {
+            String answer=binarySearch(prefix);
+            return answer;
+        }
     }
 
+    public String binarySearch(String word){
+        String result="";
+        int beg=0,end=words.size(),mid=0;
+        mid=(beg+end)/2;
+        while(beg<end)
+        {
+            Log.d("Mid",String.valueOf(mid));
+            mid=(beg+end)/2;
+            result=words.get(mid);
+            Log.d("Result",String.valueOf(result));
+            if(result.contains(word))
+            {
+                return result;
+            }
+            else if(result.compareToIgnoreCase(word)>0){
+                Log.d("lower",String.valueOf(result));
+                //result lower than word
+                end=mid;
+            }
+            else if(result.compareToIgnoreCase(word)<0){
+                Log.d("greater",String.valueOf(result));
+                //result greater than word
+                beg=mid+1;
+            }
+        }
+        return null;
+    }
     @Override
     public String getGoodWordStartingWith(String prefix) {
         String selected = null;
