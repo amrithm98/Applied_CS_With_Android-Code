@@ -66,8 +66,9 @@ public class SimpleDictionary implements GhostDictionary {
             mid=(beg+end)/2;
             result=words.get(mid);
             Log.d("Result",String.valueOf(result));
-            if(result.contains(word))
+            if(result.startsWith(word))
             {
+                Log.d("Word",result);
                 return result;
             }
             else if(result.compareToIgnoreCase(word)>0){
@@ -81,7 +82,7 @@ public class SimpleDictionary implements GhostDictionary {
                 beg=mid+1;
             }
         }
-        return null;
+        return "";
     }
     @Override
     public String getGoodWordStartingWith(String prefix) {
