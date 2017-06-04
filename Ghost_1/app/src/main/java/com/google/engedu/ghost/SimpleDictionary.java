@@ -86,7 +86,8 @@ public class SimpleDictionary implements GhostDictionary {
     }
     @Override
     public String getGoodWordStartingWith(String prefix) {
-        String selected = null;
+        String selected = "";
+
         return selected;
     }
 }
