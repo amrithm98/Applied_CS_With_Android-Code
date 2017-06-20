@@ -68,6 +68,12 @@ public class PuzzleBoard {
         previousBoard=null;
 
     }
+    PuzzleBoard(PuzzleBoard otherBoard,int steps)
+    {
+        previousBoard=otherBoard;
+        this.steps=steps+1;
+        tiles = (ArrayList<PuzzleTile>) otherBoard.tiles.clone();
+    }
 
     PuzzleBoard(PuzzleBoard otherBoard) {
         steps+=1;
@@ -145,50 +151,75 @@ public class PuzzleBoard {
         tiles.set(j, temp);
     }
 
-    public ArrayList<PuzzleBoard> neighbours() {
-
-        for(int count=0;count<tiles.size();count++)
+    public ArrayList<PuzzleBoard> neighbours()
+    {
+        int index=0;
+        for(int i=0;i<NUM_TILES*NUM_TILES;i++)
         {
-            PuzzleTile tile=tiles.get(count);
-            //1. Located the empty tile
-            if(tile==null)
+            if(tiles.get(i)==null)
+                index=i;
+        }
+        int x=index%3;
+        int y=index/3;
+        ArrayList<PuzzleBoard> ar=new ArrayList<>();
+        for (int []cordinates:NEIGHBOUR_COORDS)
+        {
+            int xx=x+cordinates[0];
+            int yy=y+cordinates[1];
+            if(xx>=0&&xx<NUM_TILES&&yy>=0&&yy<NUM_TILES)
             {
-                ArrayList<PuzzleBoard> boardStates=new ArrayList<>();
-                //Find out valid neighbors
-                //2.Consider all the neighbours of the empty square
-                for(int [] XY:NEIGHBOUR_COORDS)
-                {
-                    //Note that we mapped a 3X3 array into 0-8 arraylist
-                    //Checking if neighbours are inside the board
-                    int posX,posY,curX,curY;
-                    posY=count/NUM_TILES;   //Use index 6 and 8 as examples to explain. Consider method XYtoindex()
-                    posX=count%NUM_TILES;
-                    curX=XY[0];
-                    curY=XY[1];
-                    //Checks if the Neighbour's X value is inside the board
-                    if( posX+curX <NUM_TILES && posX+curX>=0)
-                    {
-                        //Checks if the Neighbour's Y value is inside the board
-                        if(posY+curY<NUM_TILES && posY+curY>=0)
-                        {
-                            //3. Valid neighbour, create new board
-                            //We cloned the current board to a new board
-                            PuzzleBoard board=new PuzzleBoard(this);
-                            //Now we will swap the null tile with the current neighbour in the cloned board
-                            //count has the current null tile
-                            //We need to find the index of the neighbour in the arraylist
-                            //3 Rows...Going down by each row increases index by 3
-                            board.swapTiles(count,count+curX+NUM_TILES*curY);
-                            //Added the new board to the state list
-                            boardStates.add(board);
-                        }
-                    }
-                }
-                return boardStates;
+                PuzzleBoard temp=new PuzzleBoard(this,steps);
+                temp.swapTiles(XYtoIndex(xx,yy),XYtoIndex(x,y));
+                ar.add(temp);
             }
         }
-        return null;
+        return ar;
     }
+
+//    public ArrayList<PuzzleBoard> neighbours() {
+//
+//        ArrayList<PuzzleBoard> boardStates=new ArrayList<>();
+//        for(int count=0;count<tiles.size();count++)
+//        {
+//            PuzzleTile tile=tiles.get(count);
+//            //1. Located the empty tile
+//            if(tile==null)
+//            {
+//                //Find out valid neighbors
+//                //2.Consider all the neighbours of the empty square
+//                for(int [] XY:NEIGHBOUR_COORDS)
+//                {
+//                    //Note that we mapped a 3X3 array into 0-8 arraylist
+//                    //Checking if neighbours are inside the board
+//                    int posX,posY,curX,curY;
+//                    posY=count/NUM_TILES;   //Use index 6 and 8 as examples to explain. Consider method XYtoindex()
+//                    posX=count%NUM_TILES;
+//                    curX=XY[0];
+//                    curY=XY[1];
+//                    //Checks if the Neighbour's X value is inside the board
+//                    if( posX+curX <NUM_TILES && posX+curX>=0)
+//                    {
+//                        //Checks if the Neighbour's Y value is inside the board
+//                        if(posY+curY<NUM_TILES && posY+curY>=0)
+//                        {
+//                            //3. Valid neighbour, create new board
+//                            //We cloned the current board to a new board
+//                            PuzzleBoard board=new PuzzleBoard(this);
+//                            //Now we will swap the null tile with the current neighbour in the cloned board
+//                            //count has the current null tile
+//                            //We need to find the index of the neighbour in the arraylist
+//                            //3 Rows...Going down by each row increases index by 3
+//                            board.swapTiles(count,count+curX+NUM_TILES*curY);
+//                            //Added the new board to the state list
+//                            boardStates.add(board);
+//                        }
+//                    }
+//                }
+//                return boardStates;
+//            }
+//        }
+//        return null;
+//    }
 
     public int priority() {
         //Need to find Manhattan distances

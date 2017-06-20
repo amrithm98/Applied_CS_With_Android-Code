@@ -124,26 +124,22 @@ public class PuzzleBoardView extends View {
             }
         };
 
-        PriorityQueue<PuzzleBoard> priorityQueue=new PriorityQueue<>(1000,puzzleBoardComparator);
+        PriorityQueue<PuzzleBoard> priorityQueue=new PriorityQueue<>(1,puzzleBoardComparator);
         //Set current board steps to 0 and previousboard to null
         puzzleBoard.steps=0;
         puzzleBoard.previousBoard=null;
         //Add current puzzleboard to priorityQueue
         priorityQueue.add(puzzleBoard);
-
+        Log.d("Before Start",String.valueOf(priorityQueue.size()));
         while(!priorityQueue.isEmpty())
         {
+            Log.d("A start Algo Queue Size",String.valueOf(priorityQueue.size()));
             PuzzleBoard leastPriorityBoard=priorityQueue.remove();
-            Log.d("A start Algo",String.valueOf(priorityQueue.size()));
             if(!leastPriorityBoard.resolved())
             {
-                if(!leastPriorityBoard.equals(leastPriorityBoard.previousBoard))
-                {
-                    priorityQueue.addAll(leastPriorityBoard.neighbours());
-                }
+                priorityQueue.addAll(leastPriorityBoard.neighbours());
             }
             else {
-                priorityQueue.clear();
                 ArrayList<PuzzleBoard> solvedBoardsList=new ArrayList<>();
                 //Add previous boards of the solved board to the list
                 while(leastPriorityBoard.previousBoard!=null)
@@ -157,8 +153,8 @@ public class PuzzleBoardView extends View {
                 animation=solvedBoardsList;
                 //To update the view
                 invalidate();
+                break;
             }
-
         }
 
 
