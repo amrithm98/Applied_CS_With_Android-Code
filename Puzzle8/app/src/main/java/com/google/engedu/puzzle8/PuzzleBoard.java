@@ -31,23 +31,32 @@ public class PuzzleBoard {
             { 0, 1 }
     };
 
-    private ArrayList<PuzzleTile> tiles;
+    private ArrayList<PuzzleTile> tiles=new ArrayList<>();
 
     PuzzleBoard(Bitmap bitmap, int parentWidth) {
 
         //Scale the given image to make it a square
         Bitmap scaledBitmap=Bitmap.createScaledBitmap(bitmap,parentWidth,parentWidth,true);
+
         int tileWidth=parentWidth/NUM_TILES;
         int i,j;
         for(i=0;i<NUM_TILES;i++)
         {
             for(j=0;j<NUM_TILES;j++)
             {
+                //X,Y,Height,Width are required. X-(j*tileWidth) Y-(i*tileWidth)
 
+                Bitmap chunk=Bitmap.createBitmap(scaledBitmap,j*tileWidth,i*tileWidth,tileWidth,tileWidth);
+
+                //Add this chunk to the tiles Arraylist--> 3*i+j will be the index of each tile
+
+                PuzzleTile object=new PuzzleTile(chunk,3*i+j);
+
+                tiles.add(object);
             }
         }
-
-
+        //Setting the 9th square to be null
+        tiles.set(8,null);
 
     }
 
