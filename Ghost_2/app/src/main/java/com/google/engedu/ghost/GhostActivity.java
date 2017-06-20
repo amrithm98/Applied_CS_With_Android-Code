@@ -53,8 +53,9 @@ public class GhostActivity extends AppCompatActivity {
         ghostText=(TextView)findViewById(R.id.ghostText);
         ghostStatus=(TextView)findViewById(R.id.gameStatus);
         AssetManager assetManager = getAssets();
+        //Instead of simple dictionary we use fast dictionary --> Using Trie
         try{
-            dictionary=new SimpleDictionary(getAssets().open("words.txt"));
+            dictionary=new FastDictionary(getAssets().open("words.txt"));
         }catch (IOException e)
         {
             Log.d("ERROR",e.toString());
@@ -179,6 +180,7 @@ public class GhostActivity extends AppCompatActivity {
             Log.d("keypressed",String.valueOf(keyCode));
             char pressKey=(char)event.getUnicodeChar();
             ghostText.append(String.valueOf(pressKey));
+            Log.d("Testisword",String.valueOf(dictionary.isWord(ghostText.getText().toString())));
             userTurn=false;
             computerTurn();
         }
