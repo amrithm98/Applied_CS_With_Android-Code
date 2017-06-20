@@ -28,6 +28,20 @@ public class TrieNode {
     }
 
     public void add(String s) {
+
+        //Add each string to the trie from FastDictionary
+        TrieNode trie=this;
+        for(int i=0;i<s.length();i++)
+        {
+            String str=String.valueOf(s.charAt(i));
+            //If there's no child 'str' for the current node--> Create a new node with str
+            if(!trie.children.containsKey(str))
+            {
+                trie.children.put(str,new TrieNode());
+            }
+            //Update node to be the recent child node When the child exists
+            trie=trie.children.get(str);
+        }
     }
 
     public boolean isWord(String s) {
