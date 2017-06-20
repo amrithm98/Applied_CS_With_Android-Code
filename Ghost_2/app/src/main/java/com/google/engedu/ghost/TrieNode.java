@@ -17,7 +17,9 @@ package com.google.engedu.ghost;
 
 import android.util.Log;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
 
 public class TrieNode {
@@ -75,6 +77,17 @@ public class TrieNode {
 
         TrieNode trie=this;
         String word="";
+        char alpha[]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        //Just to shuffle the array so that we dont get the same word every time given a starting letter
+        alpha=shuffleArray(alpha);
+        if(s.equalsIgnoreCase(""))
+        {
+            Random random=new Random();
+            int index=random.nextInt(26);
+            String startingWord=getAnyWordStartingWith(String.valueOf(alpha[index]));
+            return startingWord;
+
+        }
 
         for(int i=0;i<s.length();i++)
         {
@@ -93,7 +106,7 @@ public class TrieNode {
         //We repeat the search with the do while loop and findout 'helps'
         do {
 
-            for(char ch='a';ch<='z';ch++)
+            for(char ch: alpha)
             {
                 String str=String.valueOf(ch);
                 if(trie.children.containsKey(str))
@@ -111,6 +124,22 @@ public class TrieNode {
         Log.d("wordfound",word);
 
         return word;
+    }
+
+    public static char[] shuffleArray(char[] array)
+    {
+        int index;
+        char temp;
+        Random random = new Random();
+        for (int i = array.length - 1; i > 0; i--)
+        {
+            index = random.nextInt(i + 1);
+            temp = array[index];
+            array[index] = array[i];
+            array[i] = temp;
+            Log.d("Shuffling",String.valueOf(array[i]));
+        }
+        return array;
     }
 
     public String getGoodWordStartingWith(String s) {

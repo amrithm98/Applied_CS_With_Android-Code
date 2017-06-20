@@ -26,10 +26,13 @@ import java.util.List;
 import java.util.Random;
 
 public class SimpleDictionary implements GhostDictionary {
+
     private ArrayList<String> words;
     int start,stop;
     Random random=new Random();
+
     public SimpleDictionary(InputStream wordListStream) throws IOException {
+
         BufferedReader in = new BufferedReader(new InputStreamReader(wordListStream));
         words = new ArrayList<>();
         String line = null;
