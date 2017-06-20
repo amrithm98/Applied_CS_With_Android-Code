@@ -33,6 +33,12 @@ public class PuzzleBoard {
 
     private ArrayList<PuzzleTile> tiles=new ArrayList<>();
 
+    //Added for solving
+    private int steps;
+    private PuzzleBoard previousBoard;
+
+
+
     PuzzleBoard(Bitmap bitmap, int parentWidth) {
 
         //Scale the given image to make it a square
@@ -56,11 +62,14 @@ public class PuzzleBoard {
             }
         }
         //Setting the 9th square to be null
-        tiles.set(8,null);
+        //tiles.set(8,null);
+        tiles.set(NUM_TILES*NUM_TILES-1,null);
 
     }
 
     PuzzleBoard(PuzzleBoard otherBoard) {
+        steps+=1;
+        previousBoard=otherBoard;
         tiles = (ArrayList<PuzzleTile>) otherBoard.tiles.clone();
     }
 
@@ -148,15 +157,15 @@ public class PuzzleBoard {
                     //Note that we mapped a 3X3 array into 0-8 arraylist
                     //Checking if neighbours are inside the board
                     int posX,posY,curX,curY;
-                    posY=count/3;   //Use index 6 and 8 as examples to explain. Consider method XYtoindex()
-                    posX=count%3;
+                    posY=count/NUM_TILES;   //Use index 6 and 8 as examples to explain. Consider method XYtoindex()
+                    posX=count%NUM_TILES;
                     curX=XY[0];
                     curY=XY[1];
                     //Checks if the Neighbour's X value is inside the board
-                    if( posX+curX <3 && posX+curX>=0)
+                    if( posX+curX <NUM_TILES && posX+curX>=0)
                     {
                         //Checks if the Neighbour's Y value is inside the board
-                        if(posY+curY<3 && posY+curY>=0)
+                        if(posY+curY<NUM_TILES && posY+curY>=0)
                         {
                             //3. Valid neighbour, create new board
                             //We cloned the current board to a new board
@@ -178,7 +187,24 @@ public class PuzzleBoard {
     }
 
     public int priority() {
-        return 0;
+        //Need to find Manhattan distances
+        //Sum of rowchange required + column change required
+        int manhattanDistance=0;
+        int rowShift,columnShift;
+        for(int i=0;i<tiles.size();i++)
+        {
+            if(tiles.get(i)!=null)
+            {
+                //Get the position of the tile in the arraylist
+                int tilePos=tiles.get(i).getNumber();
+                //Imagine shifting Tile with number 1 from index 5 to index 0. We need to shift 2 col and 1 row
+                columnShift=Math.abs(i%NUM_TILES-tilePos%NUM_TILES);
+                rowShift=Math.abs(i/NUM_TILES-tilePos/NUM_TILES);
+                manhattanDistance+=rowShift+columnShift;
+            }
+        }
+        int totalPriority=manhattanDistance+steps;
+        return totalPriority;
     }
 
 }
