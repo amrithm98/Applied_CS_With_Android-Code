@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 public class PuzzleBoardView extends View {
@@ -100,6 +102,30 @@ public class PuzzleBoardView extends View {
     }
 
     public void solve() {
+
+    /*  1.We've to create a PriorityQueue.
+        2.Add the current Puzzleboard to it
+        3.Repeat:
+            3.1 Deque the element with least priority from the PriorityQueue
+            3.2 if the current puzzleboard is not the solution,then enqueue the neighbors of the current board to the PriorityQueue
+            3.3 if solution is obtained. Create an arraylist of all the puzzleboards that lead to the solution and reverse the list
+                3.3.1 Copy that ArrayList to PuzzleBoardView.animation to see the animated solution
+
+        To Implement the priority queue, we need to make a comparator
+    */
+        //Comparator
+        Comparator<PuzzleBoard> puzzleBoardComparator=new Comparator<PuzzleBoard>() {
+            @Override
+            public int compare(PuzzleBoard one, PuzzleBoard two) {
+                int diff=one.priority()-two.priority();
+                return diff;
+            }
+        };
+
+        PriorityQueue<PuzzleBoard> priorityQueue=new PriorityQueue<>(500,puzzleBoardComparator);
+        //Se
+
+
 
     }
 }
