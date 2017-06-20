@@ -137,18 +137,19 @@ public class PuzzleBoard {
         for(int count=0;count<tiles.size();count++)
         {
             PuzzleTile tile=tiles.get(count);
-
+            //1. Located the empty tile
             if(tile==null)
             {
                 ArrayList<PuzzleBoard> boardStates=new ArrayList<>();
                 //Find out valid neighbors
+                //2.Consider all the neighbours of the empty square
                 for(int [] XY:NEIGHBOUR_COORDS)
                 {
                     //Note that we mapped a 3X3 array into 0-8 arraylist
                     //Checking if neighbours are inside the board
                     int posX,posY,curX,curY;
-                    posX=count/3;
-                    posY=count%3;
+                    posY=count/3;   //Use index 6 and 8 as examples to explain. Consider method XYtoindex()
+                    posX=count%3;
                     curX=XY[0];
                     curY=XY[1];
                     //Checks if the Neighbour's X value is inside the board
@@ -157,6 +158,7 @@ public class PuzzleBoard {
                         //Checks if the Neighbour's Y value is inside the board
                         if(posY+curY<3 && posY+curY>=0)
                         {
+                            //3. Valid neighbour, create new board
                             //We cloned the current board to a new board
                             PuzzleBoard board=new PuzzleBoard(this);
                             //Now we will swap the null tile with the current neighbour in the cloned board
