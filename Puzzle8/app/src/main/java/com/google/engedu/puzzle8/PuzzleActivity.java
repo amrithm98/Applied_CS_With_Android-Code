@@ -18,6 +18,7 @@ package com.google.engedu.puzzle8;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,10 +68,20 @@ public class PuzzleActivity extends AppCompatActivity {
     }
 
     public void dispatchTakePictureIntent(View view) {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode==RESULT_OK)
+        {
+            Bundle image=data.getExtras();
+            imageBitmap=(Bitmap)image.get("data");
+            boardView.initialize(imageBitmap);
+        }
     }
 
     public void shuffleImage(View view) {
@@ -79,6 +90,5 @@ public class PuzzleActivity extends AppCompatActivity {
 
     public void solve(View view) {
       boardView.solve();
-
     }
 }

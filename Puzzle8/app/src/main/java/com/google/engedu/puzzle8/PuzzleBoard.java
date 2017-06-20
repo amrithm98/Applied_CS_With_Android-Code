@@ -30,9 +30,25 @@ public class PuzzleBoard {
             { 0, -1 },
             { 0, 1 }
     };
+
     private ArrayList<PuzzleTile> tiles;
 
     PuzzleBoard(Bitmap bitmap, int parentWidth) {
+
+        //Scale the given image to make it a square
+        Bitmap scaledBitmap=Bitmap.createScaledBitmap(bitmap,parentWidth,parentWidth,true);
+        int tileWidth=parentWidth/NUM_TILES;
+        int i,j;
+        for(i=0;i<NUM_TILES;i++)
+        {
+            for(j=0;j<NUM_TILES;j++)
+            {
+
+            }
+        }
+
+
+
     }
 
     PuzzleBoard(PuzzleBoard otherBoard) {

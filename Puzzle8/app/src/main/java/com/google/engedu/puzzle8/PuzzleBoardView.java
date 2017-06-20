@@ -92,5 +92,6 @@ public class PuzzleBoardView extends View {
     }
 
     public void solve() {
+
     }
 }
