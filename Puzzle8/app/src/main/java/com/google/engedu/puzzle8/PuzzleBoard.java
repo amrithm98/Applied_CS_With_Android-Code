@@ -39,7 +39,7 @@ public class PuzzleBoard {
         Bitmap scaledBitmap=Bitmap.createScaledBitmap(bitmap,parentWidth,parentWidth,true);
 
         int tileWidth=parentWidth/NUM_TILES;
-        int i,j;
+        int i,j,count=0;
         for(i=0;i<NUM_TILES;i++)
         {
             for(j=0;j<NUM_TILES;j++)
@@ -50,8 +50,8 @@ public class PuzzleBoard {
 
                 //Add this chunk to the tiles Arraylist--> 3*i+j will be the index of each tile
 
-                PuzzleTile object=new PuzzleTile(chunk,3*i+j);
-
+                PuzzleTile object=new PuzzleTile(chunk,count);
+                count+=1;
                 tiles.add(object);
             }
         }
@@ -133,6 +133,45 @@ public class PuzzleBoard {
     }
 
     public ArrayList<PuzzleBoard> neighbours() {
+
+        for(int count=0;count<tiles.size();count++)
+        {
+            PuzzleTile tile=tiles.get(count);
+
+            if(tile==null)
+            {
+                ArrayList<PuzzleBoard> boardStates=new ArrayList<>();
+                //Find out valid neighbors
+                for(int [] XY:NEIGHBOUR_COORDS)
+                {
+                    //Note that we mapped a 3X3 array into 0-8 arraylist
+                    //Checking if neighbours are inside the board
+                    int posX,posY,curX,curY;
+                    posX=count/3;
+                    posY=count%3;
+                    curX=XY[0];
+                    curY=XY[1];
+                    //Checks if the Neighbour's X value is inside the board
+                    if( posX+curX <3 && posX+curX>=0)
+                    {
+                        //Checks if the Neighbour's Y value is inside the board
+                        if(posY+curY<3 && posY+curY>=0)
+                        {
+                            //We cloned the current board to a new board
+                            PuzzleBoard board=new PuzzleBoard(this);
+                            //Now we will swap the null tile with the current neighbour in the cloned board
+                            //count has the current null tile
+                            //We need to find the index of the neighbour in the arraylist
+                            //3 Rows...Going down by each row increases index by 3
+                            board.swapTiles(count,count+curX+NUM_TILES*curY);
+                            //Added the new board to the state list
+                            boardStates.add(board);
+                        }
+                    }
+                }
+                return boardStates;
+            }
+        }
         return null;
     }
 
