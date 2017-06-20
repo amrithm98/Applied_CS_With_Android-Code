@@ -143,6 +143,6 @@ public class TrieNode {
     }
 
     public String getGoodWordStartingWith(String s) {
-        return null;
+        return "";
     }
 }
