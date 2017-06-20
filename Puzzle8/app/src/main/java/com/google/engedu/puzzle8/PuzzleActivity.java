@@ -15,6 +15,7 @@
 
 package com.google.engedu.puzzle8;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -61,8 +62,15 @@ public class PuzzleActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_tile3) {
+            PuzzleBoard.NUM_TILES=3;
+        }
+        else if(id == R.id.action_tile4){
+            PuzzleBoard.NUM_TILES=4;
+
+        }
+        else if(id == R.id.action_tile5){
+            PuzzleBoard.NUM_TILES=5;
         }
 
         return super.onOptionsItemSelected(item);

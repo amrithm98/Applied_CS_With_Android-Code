@@ -16,6 +16,7 @@
 package com.google.engedu.puzzle8;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -130,10 +131,10 @@ public class PuzzleBoardView extends View {
         puzzleBoard.previousBoard=null;
         //Add current puzzleboard to priorityQueue
         priorityQueue.add(puzzleBoard);
-        Log.d("Before Start",String.valueOf(priorityQueue.size()));
+//        Log.d("Before Start",String.valueOf(priorityQueue.size()));
         while(!priorityQueue.isEmpty())
         {
-            Log.d("A start Algo Queue Size",String.valueOf(priorityQueue.size()));
+//            Log.d("A start Algo Queue Size",String.valueOf(priorityQueue.size()));
             PuzzleBoard leastPriorityBoard=priorityQueue.remove();
             if(!leastPriorityBoard.resolved())
             {

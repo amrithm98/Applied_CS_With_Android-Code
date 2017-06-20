@@ -1,6 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".PuzzleActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/action_tile3" android:title="3 Tiles"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_tile4" android:title="4 Tiles"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_tile5" android:title="5 Tiles"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
