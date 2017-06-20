@@ -19,11 +19,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -122,8 +124,42 @@ public class PuzzleBoardView extends View {
             }
         };
 
-        PriorityQueue<PuzzleBoard> priorityQueue=new PriorityQueue<>(500,puzzleBoardComparator);
-        //Se
+        PriorityQueue<PuzzleBoard> priorityQueue=new PriorityQueue<>(1000,puzzleBoardComparator);
+        //Set current board steps to 0 and previousboard to null
+        puzzleBoard.steps=0;
+        puzzleBoard.previousBoard=null;
+        //Add current puzzleboard to priorityQueue
+        priorityQueue.add(puzzleBoard);
+
+        while(!priorityQueue.isEmpty())
+        {
+            PuzzleBoard leastPriorityBoard=priorityQueue.remove();
+            Log.d("A start Algo",String.valueOf(priorityQueue.size()));
+            if(!leastPriorityBoard.resolved())
+            {
+                if(!leastPriorityBoard.equals(leastPriorityBoard.previousBoard))
+                {
+                    priorityQueue.addAll(leastPriorityBoard.neighbours());
+                }
+            }
+            else {
+                priorityQueue.clear();
+                ArrayList<PuzzleBoard> solvedBoardsList=new ArrayList<>();
+                //Add previous boards of the solved board to the list
+                while(leastPriorityBoard.previousBoard!=null)
+                {
+                    solvedBoardsList.add(leastPriorityBoard);
+                    leastPriorityBoard=leastPriorityBoard.previousBoard;
+                }
+                //Reverse the arraylist
+                Collections.reverse(solvedBoardsList);
+                //To animate
+                animation=solvedBoardsList;
+                //To update the view
+                invalidate();
+            }
+
+        }
 
 
 

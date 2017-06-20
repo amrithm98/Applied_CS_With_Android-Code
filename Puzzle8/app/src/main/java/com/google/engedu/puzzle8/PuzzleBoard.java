@@ -34,8 +34,8 @@ public class PuzzleBoard {
     private ArrayList<PuzzleTile> tiles=new ArrayList<>();
 
     //Added for solving
-    private int steps;
-    private PuzzleBoard previousBoard;
+    public int steps;
+    public PuzzleBoard previousBoard;
 
 
 
@@ -64,6 +64,8 @@ public class PuzzleBoard {
         //Setting the 9th square to be null
         //tiles.set(8,null);
         tiles.set(NUM_TILES*NUM_TILES-1,null);
+        steps=0;
+        previousBoard=null;
 
     }
 
@@ -75,6 +77,7 @@ public class PuzzleBoard {
 
     public void reset() {
         // Nothing for now but you may have things to reset once you implement the solver.
+
     }
 
     @Override
@@ -123,6 +126,7 @@ public class PuzzleBoard {
     }
 
     public boolean resolved() {
+        //Checks if the tiles are inplace
         for (int i = 0; i < NUM_TILES * NUM_TILES - 1; i++) {
             PuzzleTile tile = tiles.get(i);
             if (tile == null || tile.getNumber() != i)
