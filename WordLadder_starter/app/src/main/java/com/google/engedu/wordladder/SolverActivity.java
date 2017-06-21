@@ -39,13 +39,13 @@ public class SolverActivity extends AppCompatActivity {
         Bundle data=intent.getExtras();
         words=data.getStringArray("words");
 
-        linearLayout=(LinearLayout)findViewById(R.id.ll_editTexts);
+        linearLayout=(LinearLayout)findViewById(R.id.ll_editTexts);//Created by us
         startText=(TextView)findViewById(R.id.startTextView);
         endText=(TextView)findViewById(R.id.endTextView);
-        editTexts=new EditText[words.length-2];
+        editTexts=new EditText[words.length-2];//No need of first and last word
 
-        startText.setText(words[0].toString());
-        endText.setText(words[words.length-1].toString());
+        startText.setText(words[0].toString()); //Set first word
+        endText.setText(words[words.length-1].toString());//set last word
         //Loading dictionary
         AssetManager assetManager = getAssets();
         try {
@@ -55,13 +55,16 @@ public class SolverActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, "Could not load dictionary", Toast.LENGTH_LONG);
             toast.show();
         }
-        //1 to length-1 ... First and last words are already there
+        //Initialize editTexts along with adding listeners for color
         for(int i=0;i<editTexts.length;i++)
         {
             editTexts[i]=new EditText(SolverActivity.this);
+            //Coloring
             editTexts[i].setRawInputType(InputType.TYPE_CLASS_TEXT);
             editTexts[i].setImeOptions(EditorInfo.IME_ACTION_GO);
+            //Adding to layout
             linearLayout.addView(editTexts[i]);
+            //Again to coloring
             final EditText et=editTexts[i];
             final int index=i;
             et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -79,17 +82,22 @@ public class SolverActivity extends AppCompatActivity {
         }
     }
 
+    //Handler for solve button
     public void onSolve(View view)
     {
         for(int i=1;i<words.length-1;i++)
         {
             editTexts[i-1].setText(words[i]);
+            //Coloring the word
             editTexts[i-1].setTextColor(getResources().getColor(R.color.green));
         }
         Toast.makeText(this,"Solved",Toast.LENGTH_SHORT).show();
     }
 
+    //Coloring the word
+
     private void processWord(EditText editText,int index) {
+
         String word = editText.getText().toString().trim().toLowerCase();
         if (word.length() == 0) {
             return;
@@ -104,18 +112,18 @@ public class SolverActivity extends AppCompatActivity {
             if(index>0)
             {
                 String wordAbove=editTexts[index-1].getText().toString().toLowerCase();
-                if(index<editTexts.length-1)
+                if(index<editTexts.length-1)    //Index from 1 to editTexts.lenth -1 Check both top and bottom words
                 {
                     String wordBelow=editTexts[index+1].getText().toString().toLowerCase();
                     Log.d("Wordabove",wordAbove);
-                    if(!wordBelow.isEmpty())
+                    if(!wordBelow.isEmpty())    //Sometimes bottom word will be empty
                     {
                         Log.d("Wordbelow",wordBelow);
                         if(!neighbours.contains(wordBelow))
                             valid=false;
                     }
                 }
-                else //Index=editTexts.length - 1
+                else //Index=editTexts.length - 1   Check only the last word
                 {
                     if(!dictionary.neighbours(words[words.length-1]).contains(word))
                     {
@@ -125,7 +133,7 @@ public class SolverActivity extends AppCompatActivity {
                 if(!neighbours.contains(wordAbove))
                     valid=false;
             }
-            else if(index==0)
+            else if(index==0)   //If index==0 check only the first word
             {
                 if(!dictionary.neighbours(words[0]).contains(word))
                 {
@@ -133,6 +141,7 @@ public class SolverActivity extends AppCompatActivity {
                 }
             }
 
+            //Check status of flag
             if(valid)
                 editText.setTextColor(green);
             else
