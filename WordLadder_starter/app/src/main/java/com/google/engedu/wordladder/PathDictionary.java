@@ -26,10 +26,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Queue;
 
 public class PathDictionary {
     private static final int MAX_WORD_LENGTH = 4;
+    private static final int MAX_DEPTH=7;
     private static HashSet<String> words = new HashSet<>();
 
     public PathDictionary(InputStream inputStream) throws IOException {
@@ -55,16 +57,19 @@ public class PathDictionary {
     }
 
     private ArrayList<String> neighbours(String word) {
-
+        char alpha[]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        //Here we change each letter of the word to get a valid word and add them to a list
         ArrayList<String> neighbourWords=new ArrayList<>();
         for(int i=0;i<word.length();i++)
         {
-            for(char ch='a';ch<='z';ch++)
+            for(char ch : alpha)
             {
+                //String is immutable ... StringBuilder is mutable
                 StringBuilder str=new StringBuilder(word);
                 str.setCharAt(i,ch);
                 if(isWord(str.toString()))
                 {
+                    Log.d("Same word",String.valueOf(neighbourWords.contains(word)));
                     neighbourWords.add(str.toString());
                 }
 
@@ -73,7 +78,41 @@ public class PathDictionary {
         return neighbourWords;
     }
 
+
     public String[] findPath(String start, String end) {
+        Log.d("Words",neighbours(start).get(0));
+        Log.d("Words Length",String.valueOf(neighbours(start).size()));
+        //We need to BFS over the word graph by adding neighbors of a word to a queue
+        ArrayDeque<ArrayList<String >> arrayListArrayDeque=new ArrayDeque<>();
+        HashSet<String> visited = new HashSet<>();
+        visited.add(start);
+        ArrayList<String> startElement=new ArrayList<>();
+        startElement.add(start);
+        arrayListArrayDeque.add(startElement);
+        while(!arrayListArrayDeque.isEmpty()) {
+            ArrayList<String> currentPath = arrayListArrayDeque.poll();
+
+            if (currentPath.size()>MAX_DEPTH) {
+                break;
+            }
+            //We need to examine each neighbor. If neighbor is the end..add it to currnt path and return the path
+            //Otherwise add the neighbour to the current path
+            String lastWord = currentPath.get(currentPath.size() - 1);
+            for (String s : neighbours(lastWord)) {
+                if (s.equals(end)) {
+                    currentPath.add(end);
+                    return currentPath.toArray(new String[currentPath.size()]);
+                } else {
+                    if(!visited.contains(s))
+                    {
+                        visited.add(s);
+                        ArrayList<String> nextPath = new ArrayList<>(currentPath);
+                        nextPath.add(s);
+                        arrayListArrayDeque.add(nextPath);
+                    }
+                }
+            }
+        }
         return null;
     }
 }
