@@ -107,17 +107,22 @@ public class SolverActivity extends AppCompatActivity {
                 if(index<editTexts.length-1)
                 {
                     String wordBelow=editTexts[index+1].getText().toString().toLowerCase();
-                    if(wordBelow!="" && !neighbours.contains(wordBelow))
-                        valid=false;
+                    Log.d("Wordabove",wordAbove);
+                    if(!wordBelow.isEmpty())
+                    {
+                        Log.d("Wordbelow",wordBelow);
+                        if(!neighbours.contains(wordBelow))
+                            valid=false;
+                    }
                 }
-                else //Index=editTexts.length - 1 
+                else //Index=editTexts.length - 1
                 {
                     if(!dictionary.neighbours(words[words.length-1]).contains(word))
                     {
                         valid=false;
                     }
                 }
-                if(!neighbours.contains(word))
+                if(!neighbours.contains(wordAbove))
                     valid=false;
             }
             else if(index==0)
