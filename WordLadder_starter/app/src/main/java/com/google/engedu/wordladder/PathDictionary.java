@@ -50,11 +50,27 @@ public class PathDictionary {
     }
 
     public boolean isWord(String word) {
+
         return words.contains(word.toLowerCase());
     }
 
     private ArrayList<String> neighbours(String word) {
-        return new ArrayList<String>();
+
+        ArrayList<String> neighbourWords=new ArrayList<>();
+        for(int i=0;i<word.length();i++)
+        {
+            for(char ch='a';ch<='z';ch++)
+            {
+                StringBuilder str=new StringBuilder(word);
+                str.setCharAt(i,ch);
+                if(isWord(str.toString()))
+                {
+                    neighbourWords.add(str.toString());
+                }
+
+            }
+        }
+        return neighbourWords;
     }
 
     public String[] findPath(String start, String end) {
