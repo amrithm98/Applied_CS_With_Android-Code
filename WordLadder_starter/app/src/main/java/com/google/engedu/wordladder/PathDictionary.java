@@ -69,8 +69,8 @@ public class PathDictionary {
                 str.setCharAt(i,ch);
                 if(isWord(str.toString()))
                 {
-                    Log.d("Same word",String.valueOf(neighbourWords.contains(word)));
-                    neighbourWords.add(str.toString());
+                    if(!str.equals(word))
+                        neighbourWords.add(str.toString());
                 }
 
             }
@@ -80,8 +80,8 @@ public class PathDictionary {
 
 
     public String[] findPath(String start, String end) {
-        Log.d("Words",neighbours(start).get(0));
-        Log.d("Words Length",String.valueOf(neighbours(start).size()));
+//        Log.d("Words",neighbours(start).get(0));
+//        Log.d("Words Length",String.valueOf(neighbours(start).size()));
         //We need to BFS over the word graph by adding neighbors of a word to a queue
         ArrayDeque<ArrayList<String >> arrayListArrayDeque=new ArrayDeque<>();
         HashSet<String> visited = new HashSet<>();

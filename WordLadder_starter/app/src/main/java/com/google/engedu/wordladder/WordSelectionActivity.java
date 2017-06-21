@@ -61,10 +61,11 @@ public class WordSelectionActivity extends AppCompatActivity {
                 endWordView.getText().toString().toLowerCase());
         if (words != null) {
             // TODO: Launch new activity here
-            for(String i: words)
-            {
-                Log.d("Wordpath",i);
-            }
+            Intent intent=new Intent(WordSelectionActivity.this,SolverActivity.class);
+            Bundle data=new Bundle();
+            data.putStringArray("words",words);
+            intent.putExtras(data);
+            startActivity(intent);
         } else {
             Log.i("Word ladder", "Word combination is not possible");
             Toast toast = Toast.makeText(this, "Couldn't find path between the two given words",
