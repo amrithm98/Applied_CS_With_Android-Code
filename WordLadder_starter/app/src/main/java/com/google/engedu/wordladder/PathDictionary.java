@@ -56,7 +56,7 @@ public class PathDictionary {
         return words.contains(word.toLowerCase());
     }
 
-    private ArrayList<String> neighbours(String word) {
+    public ArrayList<String> neighbours(String word) {
         char alpha[]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         //Here we change each letter of the word to get a valid word and add them to a list
         ArrayList<String> neighbourWords=new ArrayList<>();
