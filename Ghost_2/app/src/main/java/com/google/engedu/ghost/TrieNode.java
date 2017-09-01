@@ -17,6 +17,7 @@ package com.google.engedu.ghost;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
@@ -120,7 +121,7 @@ public class TrieNode {
                 }
             }
 
-        }while(trie.isWord==false);
+        } while(trie.isWord==false);
         Log.d("wordfound",word);
 
         return word;
@@ -141,9 +142,68 @@ public class TrieNode {
         }
         return array;
     }
+    //Not Working Yet
+    public void traversal(TrieNode t,String s,ArrayList<String> words)
+    {
+        if(t.isWord && t.children.isEmpty())
+        {
+            words.add(s);
+        }
+        else
+        {
+            if(t.isWord)
+                words.add(s);
+            else
+            {
+                for(String key: t.children.keySet())
+                {
+                    String tmp=s+key;
+                    traversal(t.children.get(key),tmp,words);
+                }
+            }
+        }
 
-
+    }
+    //Not Working Yet
     public String getGoodWordStartingWith(String s) {
-        return "";
+        TrieNode trie=this;
+        String word="";
+        char alpha[]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        //Just to shuffle the array so that we dont get the same word every time given a starting letter
+        alpha=shuffleArray(alpha);
+        Random random=new Random();
+        for(int i=0;i<s.length();i++)
+        {
+            String str=String.valueOf(s.charAt(i));
+            if(trie.children.containsKey(str)==false)
+            {
+                return "";
+            }
+            word+=str;
+            trie=trie.children.get(str);
+        }
+
+        ArrayList<String> notValidWords=new ArrayList<>();
+        ArrayList<String> ValidWords=new ArrayList<>();
+        for(String a: this.children.keySet())
+        {
+            if(!this.isWord)
+                notValidWords.add(s);
+
+        }
+        if(notValidWords.isEmpty())
+        {
+            traversal(trie,s,ValidWords);
+        }
+        else
+        {
+            int index=random.nextInt(notValidWords.size());
+            String key=notValidWords.get(index);
+            s+=key;
+            traversal(trie.children.get(key),s,ValidWords);
+        }
+        int index=random.nextInt(ValidWords.size());
+        word=ValidWords.get(index);
+        return word;
     }
 }
