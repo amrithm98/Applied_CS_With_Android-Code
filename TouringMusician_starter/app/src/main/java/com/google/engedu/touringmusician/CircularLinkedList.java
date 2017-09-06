@@ -32,6 +32,8 @@ public class CircularLinkedList implements Iterable<Point> {
          **
          **/
 
+        //Explain How A CLL should behave first--> With Diagrams!!
+
         Node(Point point,Node prev,Node next)
         {
             this.point=point;
@@ -39,6 +41,7 @@ public class CircularLinkedList implements Iterable<Point> {
             this.next=next;
         }
 
+        //We dont need this
         public Point getPoint() {
             return point;
         }
@@ -142,6 +145,43 @@ public class CircularLinkedList implements Iterable<Point> {
          **  YOUR CODE GOES HERE
          **
          **/
+        Node temp=head;
+        //No Node at All Case
+        if(temp==null)
+        {
+            insertBeginning(p);
+        }
+        //Only One Node Case
+        else if(temp.next==head)
+        {
+            insertBeginning(p);
+        }
+        //More than 2 nodes case
+        else
+        {
+            Node prevNode=temp;
+            temp=temp.next;
+
+            float prevDist=distanceBetween(prevNode.point,p);
+            float nextDist=distanceBetween(p,temp.point);
+
+            //We Need to Minimise the sum of prevDist + nextDist and Insert the new node at the minimum point
+
+            while(temp!=head)
+            {
+                float presentTotalDistance=distanceBetween(temp.point,p)+distanceBetween(p,temp.next.point);
+                if(presentTotalDistance<(prevDist+nextDist))
+                {
+                    prevNode=temp;
+                }
+                temp=temp.next;
+            }
+
+            Node node=new Node(p,prevNode,prevNode.next);
+            prevNode.next=node;
+            prevNode=prevNode.next;
+            prevNode.prev=node;
+        }
     }
 
     public void reset() {
