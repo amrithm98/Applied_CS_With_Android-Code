@@ -45,25 +45,50 @@ public class TourMap extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(mapImage, 0, 0, null);
         Paint pointPaint = new Paint();
+        Paint linePaint=new Paint();
         pointPaint.setColor(Color.RED);
+        linePaint.setColor(Color.BLACK);
         /**
          **
          **  YOUR CODE GOES HERE
          **
          **/
+
+        /*We Need A pointer to keep track of the previous node( to draw line between prev and curr)...
+         and one pointer to keep track of
+         the starting node(to draw the last line)*/
+
+        Point current=new Point(0,0);
+        Point firstPoint=new Point(0,0);
+
         for (Point p : list) {
             /**
              **
              **  YOUR CODE GOES HERE
              **
              **/
+            if(current.equals(0,0))
+            {
+                current=new Point(p);
+                firstPoint=new Point(p);
+            }
+            else
+                canvas.drawLine(current.x,current.y,p.x,p.y,linePaint);
+
+            current=p;
             canvas.drawCircle(p.x, p.y, 20, pointPaint);
+
         }
+
         /**
          **
          **  YOUR CODE GOES HERE
          **
          **/
+
+        //Connecting First and Last Points
+        canvas.drawLine(current.x,current.y,firstPoint.x,firstPoint.y,linePaint);
+
     }
 
     @Override
