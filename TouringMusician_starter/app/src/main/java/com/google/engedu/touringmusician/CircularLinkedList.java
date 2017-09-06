@@ -31,10 +31,6 @@ public class CircularLinkedList implements Iterable<Point> {
          **  YOUR CODE GOES HERE
          **
          **/
-        Node ()
-        {
-
-        }
 
         Node(Point point,Node prev,Node next)
         {
@@ -47,12 +43,6 @@ public class CircularLinkedList implements Iterable<Point> {
             return point;
         }
 
-        public void setPoint(Point point)
-        {
-            this.point=point;
-        }
-
-
     }
 
     Node head=null;
@@ -63,6 +53,7 @@ public class CircularLinkedList implements Iterable<Point> {
          **  YOUR CODE GOES HERE
          **
          **/
+
         if(head==null)
         {
             Node node=new Node(p,null,null);
@@ -93,6 +84,12 @@ public class CircularLinkedList implements Iterable<Point> {
          **  YOUR CODE GOES HERE
          **
          **/
+        Node temp=head;
+        while(temp.next!=head)
+        {
+            total+=distanceBetween(temp.point,temp.next.point);
+            temp=temp.next;
+        }
         return total;
     }
 

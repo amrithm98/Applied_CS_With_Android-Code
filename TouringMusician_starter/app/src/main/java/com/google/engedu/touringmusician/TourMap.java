@@ -54,9 +54,8 @@ public class TourMap extends View {
          **
          **/
 
-        /*We Need A pointer to keep track of the previous node( to draw line between prev and curr)...
-         and one pointer to keep track of
-         the starting node(to draw the last line)*/
+        /*We Need A pointer to keep track of the previous node( to draw line between prev and p)
+         and one pointer to keep track of the starting node(to draw the last line)*/
 
         Point current=new Point(0,0);
         Point firstPoint=new Point(0,0);
