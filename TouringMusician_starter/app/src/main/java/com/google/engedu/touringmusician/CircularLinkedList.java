@@ -87,12 +87,16 @@ public class CircularLinkedList implements Iterable<Point> {
          **  YOUR CODE GOES HERE
          **
          **/
-        Node temp=head;
-        while(temp.next!=head)
+        if(head!=null)
         {
-            total+=distanceBetween(temp.point,temp.next.point);
-            temp=temp.next;
+            Node temp=head;
+            while(temp.next!=head)
+            {
+                total+=distanceBetween(temp.point,temp.next.point);
+                temp=temp.next;
+            }
         }
+
         return total;
     }
 

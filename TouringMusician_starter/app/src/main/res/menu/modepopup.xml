@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/compare"
+        android:title="Compare"/>
+
+    <item
         android:id="@+id/beginning"
         android:title="Beginning"/>
 
