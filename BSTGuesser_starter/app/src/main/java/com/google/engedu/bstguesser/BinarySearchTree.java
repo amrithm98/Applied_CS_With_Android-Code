@@ -56,6 +56,16 @@ public class BinarySearchTree {
          **  YOUR CODE GOES HERE
          **
          **/
+        while(current.getValue()!=value)
+        {
+            if(value<current.getValue())
+            {
+                current=current.left;
+            }
+            else{
+               current=current.right;
+            }
+        }
         return current;
     }
 
