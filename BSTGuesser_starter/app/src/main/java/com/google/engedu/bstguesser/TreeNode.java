@@ -43,6 +43,39 @@ public class TreeNode {
          **  YOUR CODE GOES HERE
          **
          **/
+        //Move To RIght Subtree
+        if(value<valueToInsert)
+        {
+            if(right==null)
+            {
+                TreeNode node=new TreeNode(valueToInsert);
+                node.left=null;
+                node.right=null;
+                this.right=node;
+
+            }
+            else
+            {
+                right.insert(valueToInsert);
+            }
+        }
+        //Move To Left Subtree
+        else if(value>valueToInsert)
+        {
+            if(left==null)
+            {
+                TreeNode node=new TreeNode(valueToInsert);
+                node.left=null;
+                node.right=null;
+                this.left=node;
+            }
+            else
+            {
+                left.insert(valueToInsert);
+            }
+        }
+        else
+            return;
     }
 
     public int getValue() {
