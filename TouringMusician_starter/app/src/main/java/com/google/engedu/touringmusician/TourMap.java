@@ -48,6 +48,8 @@ public class TourMap extends View {
         Paint linePaint=new Paint();
         pointPaint.setColor(Color.RED);
         linePaint.setColor(Color.BLACK);
+        linePaint.setStrokeWidth(5);
+        linePaint.setStyle(Paint.Style.STROKE);
         /**
          **
          **  YOUR CODE GOES HERE
@@ -86,6 +88,7 @@ public class TourMap extends View {
          **/
 
         //Connecting First and Last Points
+        linePaint.setColor(Color.RED);
         canvas.drawLine(current.x,current.y,firstPoint.x,firstPoint.y,linePaint);
 
     }
