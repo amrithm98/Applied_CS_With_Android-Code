@@ -24,15 +24,38 @@ public class CircularLinkedList implements Iterable<Point> {
 
     private class Node {
         Point point;
+
         Node prev, next;
         /**
          **
          **  YOUR CODE GOES HERE
          **
          **/
+        Node ()
+        {
+
+        }
+
+        Node(Point point,Node prev,Node next)
+        {
+            this.point=point;
+            this.prev=prev;
+            this.next=next;
+        }
+
+        public Point getPoint() {
+            return point;
+        }
+
+        public void setPoint(Point point)
+        {
+            this.point=point;
+        }
+
+
     }
 
-    Node head;
+    Node head=null;
 
     public void insertBeginning(Point p) {
         /**
@@ -40,6 +63,23 @@ public class CircularLinkedList implements Iterable<Point> {
          **  YOUR CODE GOES HERE
          **
          **/
+        if(head==null)
+        {
+            Node node=new Node(p,null,null);
+            head=node;
+            node.prev=node;
+            node.next=node;
+            //Circular LL
+        }
+        else
+        {
+            Node previousNode=head.prev;
+            Node temp=head;
+            Node node=new Node(p,previousNode,head);
+            previousNode.next=node;
+            temp.prev=node;
+
+        }
     }
 
     private float distanceBetween(Point from, Point to) {
