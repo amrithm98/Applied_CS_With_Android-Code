@@ -21,7 +21,13 @@ Completed:
 <b>Unit-5 Puzzle-8</b>
 <br>
 <br>
-<b>Unit-7 WordLadder</b>
+<b>Unit-6 WordLadder</b>
+<br>
+<br>
+<b>Unit-7 Touring Musician</b>
+<br>
+<br>
+<b>Unit-8 BST Guesser</b>
 <br>
 <br>
 
