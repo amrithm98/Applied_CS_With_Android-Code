@@ -65,6 +65,7 @@ public class PuzzleActivity extends AppCompatActivity {
         if (id == R.id.action_tile3) {
             PuzzleBoard.NUM_TILES=3;
         }
+
         else if(id == R.id.action_tile4){
             PuzzleBoard.NUM_TILES=4;
 

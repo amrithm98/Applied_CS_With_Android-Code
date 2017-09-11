@@ -19,6 +19,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
+
+import static java.lang.Math.max;
 
 public class TreeNode {
     private static final int SIZE = 60;
@@ -76,7 +79,98 @@ public class TreeNode {
         }
         else
             return;
+
+        height=treeHeight();
+
+        Log.d("AVL","Value : "+value +" Height: "+height);
+
+        int bal=balance();
+
+        Log.d("AVL-Balance","Value : "+bal);
+
+        if(bal<-1)
+        {
+            leftRotate();
+        }
+
+        else if(bal>1)
+        {
+            rightRotate();
+        }
+
+        else if(bal==1 && right==null)
+        {
+            rightRotate();
+        }
+
+        else if(bal==-1 && left==null)
+        {
+            leftRotate();
+        }
+
     }
+
+    public int balance()
+    {
+        if(left==null && right==null)
+            return 0;
+
+        else if(left==null && right!=null)
+            return (0-right.height);
+
+        else if(right==null && left!=null)
+            return (left.height-0);
+
+        else
+            return (left.height-right.height);
+
+    }
+
+    public int treeHeight()
+    {
+        if(left==null && right==null)
+            return 0;
+
+        else if(left==null && right!=null)
+            return right.height++;
+
+        else if(right==null && left!=null)
+            return left.height++;
+
+        else
+        {
+            height=1+max(left.height,right.height);
+            return height;
+        }
+    }
+
+    public void rightRotate()
+    {
+        int temp=value;
+        value=left.value;
+        left.left.value=temp;
+
+        right=left;
+        left=right.left;
+        right.left=null;
+
+        height=treeHeight();
+    }
+
+    public void leftRotate()
+    {
+        int temp=value;
+        value=right.value;
+        right.right.value=temp;
+
+        left=right;
+        right=left.right;
+        left.right=null;
+
+        height=treeHeight();
+
+    }
+
 
     public int getValue() {
         return value;
