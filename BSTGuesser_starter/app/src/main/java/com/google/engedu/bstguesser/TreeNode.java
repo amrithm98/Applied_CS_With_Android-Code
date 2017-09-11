@@ -88,6 +88,12 @@ public class TreeNode {
 
         Log.d("AVL-Balance","Value : "+bal);
 
+        //reArrangeTree(bal);
+
+    }
+
+    public void reArrangeTree(int bal)
+    {
         if(bal<-1)
         {
             leftRotate();
