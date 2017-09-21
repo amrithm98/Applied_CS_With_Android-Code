@@ -81,7 +81,7 @@ public class AnagramDictionary {
     public boolean isGoodWord(String word, String base) {
 
         boolean status;
-        status=(wordSet.contains(word) && !word.contains(base));
+        status=(sortLetters(word).contains(sortLetters(base)) && wordSet.contains(word) && !word.contains(base));
         return status;
     }
 
